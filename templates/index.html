@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Series Tracker</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <script src="/static/script.js"></script>
+</head>
+<body>
+    <h1>Series Tracker</h1>
+    <a href="/create">Agregar nueva serie</a>
+    <table>
+        <tr>
+            <th>Nombre</th>
+            <th>Episodio Actual</th>
+            <th>Total</th>
+            <th>Progreso</th>
+            <th>Acciones</th>
+        </tr>
+        {{range .}}
+        <tr>
+            <td>{{.Name}}</td>
+            <td>{{.CurrentEpisode}}</td>
+            <td>{{.TotalEpisodes}}</td>
+            <td>
+                <progress value="{{.CurrentEpisode}}" max="{{.TotalEpisodes}}"></progress>
+                {{if eq .CurrentEpisode .TotalEpisodes}}
+                    <strong>COMPLETA</strong>
+                {{end}}
+            </td>
+            <td>
+                <button onclick="prevEpisode({{.ID}})">-1</button>
+                <button onclick="nextEpisode({{.ID}})">+1</button>
+            </td>
+        </tr>
+        {{end}}
+    </table>
+</body>
+</html>
